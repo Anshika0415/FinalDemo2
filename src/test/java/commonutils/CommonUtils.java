@@ -35,24 +35,21 @@ public class CommonUtils {
 		
 	}
 	
-	public void takeScreenshot(String screenshotName) {
+	public String takeScreenshot(String screenshotName) {
 	    try {
 	        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 	        screenshotName = screenshotName.replace(" ", "_");
 	        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-	        String directoryPath = System.getProperty("user.dir") + "/reports/screenshots/";
-	        
+	        String directoryPath = System.getProperty("user.dir") + "/reports/screenshots/"+ screenshotName + "_" + timestamp + ".png";
 	        // Ensure directory exists
-	        File screenshotDir = new File(directoryPath);
-	        if (!screenshotDir.exists()) {
-	            screenshotDir.mkdirs();
-	        }
-
-	        File destFile = new File(directoryPath + screenshotName + "_" + timestamp + ".png");
+	        File destFile = new File(directoryPath);
 	        FileUtils.copyFile(srcFile, destFile);
+	        return directoryPath;
 	    } catch (IOException e) {
 	        e.printStackTrace();
+	        return null;
 	    }
+	    
 	}
 
 
