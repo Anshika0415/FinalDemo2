@@ -17,6 +17,7 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.EcomWebSiteLogin;
 import pages.LoginPage;
 
 public class StepDefinition {
@@ -25,6 +26,7 @@ public class StepDefinition {
 	CommonUtils cu;
 	static ExtentReports extent;
 	ExtentTest test;
+	EcomWebSiteLogin ecom;
 	
 @Before
 public void setup(Scenario scenario)
@@ -34,7 +36,7 @@ public void setup(Scenario scenario)
     cu=new CommonUtils(driver);
 	lp=new LoginPage(driver,cu,scenario);
 	test=extent.createTest(scenario.getName());
-	
+	ecom=new EcomWebSiteLogin(driver,cu,scenario);
 }
 
 @After
@@ -46,7 +48,7 @@ public void tearDown(Scenario scenario)
 		test.fail("Step Failed Screenshot", MediaEntityBuilder.createScreenCaptureFromPath(path).build());
 	}
 	
-	
+//	driver.quit();
 }
 
 @BeforeStep
@@ -83,6 +85,10 @@ public void agent_enters_and(String name, String pass) {
 public void agent_performs_tasks_on_practice_page() throws InterruptedException {
     lp.practicePageTasks();
 }
+// Functions for new ecom page
 
-
+@Then("enter into ecom website")
+public void enter_into_ecom_website() {
+    ecom.enterEcomPage();
+}
 }
