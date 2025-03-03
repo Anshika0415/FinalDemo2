@@ -45,7 +45,7 @@ public void tearDown(Scenario scenario)
 		String path=cu.takeScreenshot(scenario.getName());
 		test.fail("Step Failed Screenshot", MediaEntityBuilder.createScreenCaptureFromPath(path).build());
 	}
-	driver.quit();
+	
 	
 }
 
@@ -80,7 +80,7 @@ public void agent_enters_and(String name, String pass) {
 }
 
 @Then("agent performs tasks on practice page")
-public void agent_performs_tasks_on_practice_page() {
+public void agent_performs_tasks_on_practice_page() throws InterruptedException {
     lp.practicePageTasks();
 }
 
